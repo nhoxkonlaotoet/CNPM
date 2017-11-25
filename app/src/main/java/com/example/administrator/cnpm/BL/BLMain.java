@@ -14,10 +14,6 @@ public class BLMain {
 
     DBConnect connectionDB = new DBConnect();
     Connection  con = connectionDB.CONN();
-    public BLMain(){
-
-    }
-
 
     public String getRole(String userid) {
         String r="";
@@ -28,7 +24,7 @@ public class BLMain {
                 return "Không có kết nối";
             } else {
                 //   String query = "select top 1 QuyenHan from TaiKhoan where SDT='" + userid + "'";
-                String query ="select QuyenHan from TaiKhoan where SDT='099999999'";
+                String query ="select QuyenHan from TaiKhoan where SDT='"+userid+"'";
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
 

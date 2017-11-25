@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                intent.putExtra("isCustomer",false );
+                intent.putExtra("user",userid );
                 startActivity(intent);
                 finish();
             }

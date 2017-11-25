@@ -13,9 +13,6 @@ import java.sql.Statement;
 public class BLLogin {
     DBConnect connectionDB = new DBConnect();
     Connection   con = connectionDB.CONN();
-    public BLLogin(){
-
-    }
 
     public Boolean Login(String userid, String password) {
         try {

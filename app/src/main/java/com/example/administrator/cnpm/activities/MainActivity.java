@@ -9,12 +9,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.administrator.cnpm.BL.BLMain;
 import com.example.administrator.cnpm.R;
 import com.example.administrator.cnpm.fragments.MapFragment;
 import com.example.administrator.cnpm.fragments.NewOrderFragment;
@@ -22,6 +23,7 @@ import com.example.administrator.cnpm.fragments.ProductFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    String user;
     Boolean isCustomer;
     Toolbar toolbar;
     TextView segNew, segHisttory;
@@ -87,8 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent callerIntent=getIntent();
         //có intent rồi thì lấy Bundle dựa vào MyPackage
-        isCustomer= callerIntent.getBooleanExtra("isCustomer",true);
-        Log.e("là khách: ",isCustomer.toString());
+        user= callerIntent.getStringExtra("user");
+        BLMain db =new BLMain();
+
+        isCustomer = db.getRole(user)=="Khách"?false:true;
+        Toast.makeText(MainActivity.this, db.getRole(user)+"\t"+ isCustomer.toString(), Toast.LENGTH_SHORT).show();
 
         navigation.setSelectedItemId(R.id.navigation_home);
 

@@ -18,7 +18,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.administrator.cnpm.BL.BLProduct;
 import com.example.administrator.cnpm.R;
 import com.example.administrator.cnpm.models.A;
 
@@ -52,8 +54,10 @@ public class ProductFragment extends Fragment {
         View view = getView();
         txtSearch = (EditText)view.findViewById(R.id.txtSearch);
         listView = (ListView) view.findViewById(R.id.listProduct);
+        BLProduct db = new BLProduct();
+        String name = db.TypeName();
 
-
+        Toast.makeText(getActivity(), name+".", Toast.LENGTH_SHORT).show();
         List<A> list = new ArrayList<A>();
         //  listView.setItemsCanFocus(false);
         listView.setFocusable(false);
@@ -66,8 +70,10 @@ public class ProductFragment extends Fragment {
         list.add(new A("Chai nước 1L",bitmap,10000));
         list.add(new A("Chai nước 330ml",bitmap,3000));
 
-        ProductAdapter productAdapter = new ProductAdapter(list);
+        ProductAdapter productAdapter = new ProductAdapter();
+
         listView.setAdapter(productAdapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -92,19 +98,20 @@ public class ProductFragment extends Fragment {
     }
 
     class ProductAdapter extends BaseAdapter {
-        List<A> list;
-        public ProductAdapter(List<A> list)
+
+
+        public ProductAdapter()
         {
-            this.list=list;
         }
         @Override
         public int getCount() {
-            return list.size();
+
+            return 0;
         }
 
         @Override
         public Object getItem(int position) {
-            return list.get(position);
+          return null;
         }
 
         @Override
@@ -119,9 +126,9 @@ public class ProductFragment extends Fragment {
             TextView txtName= (TextView)convertView.findViewById(R.id.txtName);
             TextView txtCost= (TextView) convertView.findViewById(R.id.txtCost);
 
-            imageView.setImageBitmap(list.get(position).image);
-            txtName.setText(list.get(position).name);
-            txtCost.setText(list.get(position).cost.toString()+"đ");
+            imageView.setImageBitmap(null);
+            txtName.setText("1");
+            txtCost.setText("10000đ");
 
             return convertView;
         }
