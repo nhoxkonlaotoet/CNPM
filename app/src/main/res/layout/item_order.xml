@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtOrderNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="Số đơn hàng"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtStatus"
+        android:layout_alignBottom="@+id/txtStatus"
+        android:layout_alignLeft="@+id/txtOrderNumber"
+        android:layout_alignStart="@+id/txtOrderNumber"
+        android:text="Số sản phẩm"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtQuantity"
+        android:layout_alignStart="@+id/txtQuantity"
+        android:layout_below="@+id/txtQuantity"
+        android:layout_marginTop="18dp"
+        android:text="Trị giá"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtOrderNumber"
+        android:layout_marginTop="17dp"
+        android:text="Tình trạng" />
+
+</RelativeLayout>

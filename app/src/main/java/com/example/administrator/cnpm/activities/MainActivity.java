@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.administrator.cnpm.R;
 import com.example.administrator.cnpm.fragments.MapFragment;
+import com.example.administrator.cnpm.fragments.NewOrderFragment;
 import com.example.administrator.cnpm.fragments.ProductFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             segment.setVisibility(View.INVISIBLE);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             FragmentManager manager =getSupportFragmentManager();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar= (Toolbar)findViewById(R.id.toolbar2);
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
+        segment.setVisibility(View.INVISIBLE);
 
 
         Intent callerIntent=getIntent();
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         isCustomer= callerIntent.getBooleanExtra("isCustomer",true);
         Log.e("là khách: ",isCustomer.toString());
 
-
+        navigation.setSelectedItemId(R.id.navigation_home);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
@@ -111,9 +114,9 @@ public class MainActivity extends AppCompatActivity {
                 segHisttory.setBackgroundColor(ContextCompat.getColor(MainActivity.this,R.color.colorWhite));
                 segHisttory.setTextColor(ContextCompat.getColor(MainActivity.this,R.color.colorPrimaryDark));
 
-//                OrderNewFragment orderNewFragment = new OrderNewFragment();
-//                android.app.FragmentManager manager= getFragmentManager();
-//                manager.beginTransaction().replace(R.id.contenLayout,orderNewFragment,orderNewFragment.getTag()).commit();
+                NewOrderFragment newOrderFragment = new NewOrderFragment();
+                FragmentManager manager =getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.contentLayout,newOrderFragment,newOrderFragment.getTag()).commit();
             }
         });
         segHisttory.setOnClickListener(new View.OnClickListener() {
