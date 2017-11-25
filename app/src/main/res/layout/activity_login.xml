@@ -24,7 +24,7 @@
             android:layout_margin="5dp"
             android:ems="10"
             android:hint="Số điện thoại"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:textColor="@color/colorWhite" />
 
         <EditText

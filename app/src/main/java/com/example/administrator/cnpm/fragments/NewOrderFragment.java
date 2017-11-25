@@ -40,6 +40,9 @@ public class NewOrderFragment extends Fragment {
         list.add(new Order("1",new Date(), 123912, "0", "Đã gửi"));
         list.add(new Order("1",new Date(), 123912, "0", "Đã gửi"));
         list.add(new Order("1",new Date(), 123912, "0", "Đã gửi"));
+
+        OrderAdapter orderAdapter = new OrderAdapter(list);
+        listOrder.setAdapter(orderAdapter);
     }
 
     @Override
