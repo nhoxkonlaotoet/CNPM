@@ -4,10 +4,13 @@ package com.example.administrator.cnpm.fragments;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,19 +21,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.cnpm.BL.BLProduct;
 import com.example.administrator.cnpm.R;
-import com.example.administrator.cnpm.models.A;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ProductFragment extends Fragment {
+
+    public List<Object> lstProduct;
+
 
     EditText txtSearch;
     Button btnSearch;
@@ -48,6 +51,7 @@ public class ProductFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_product, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -55,20 +59,27 @@ public class ProductFragment extends Fragment {
         txtSearch = (EditText)view.findViewById(R.id.txtSearch);
         listView = (ListView) view.findViewById(R.id.listProduct);
         BLProduct db = new BLProduct();
-        String name = db.TypeName();
+        lstProduct= db.LoadProduct();
 
-        Toast.makeText(getActivity(), name+".", Toast.LENGTH_SHORT).show();
-        List<A> list = new ArrayList<A>();
+        for(Object x : lstProduct ){
+            try {
+                Log.e(": ", (String) x.getClass().getField("id").get(x));
+                Log.e(": ", (String) x.getClass().getField("name").get(x));
+                Log.e(": ", x.getClass().getField("capacity").get(x).toString());
+                Log.e(": ", x.getClass().getField("price").get(x).toString());
+
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+      //  Toast.makeText(getActivity(), +".", Toast.LENGTH_SHORT).show();
+
         //  listView.setItemsCanFocus(false);
         listView.setFocusable(false);
 
-        Drawable drawable = getResources().getDrawable(R.drawable.binh20l);
-        Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
 
-        list.add(new A("Bình nước 20L",bitmap,15000));
-        list.add(new A("Bình nước 5L",bitmap,20000));
-        list.add(new A("Chai nước 1L",bitmap,10000));
-        list.add(new A("Chai nước 330ml",bitmap,3000));
 
         ProductAdapter productAdapter = new ProductAdapter();
 
@@ -81,8 +92,9 @@ public class ProductFragment extends Fragment {
                 ProductDetailFragment nextFrag= new ProductDetailFragment();
 
                 Bundle bundle = new Bundle();
-                bundle.putString("key","abc"); // Put anything what you want
-               nextFrag.setArguments(bundle);
+        //        bundle.putSerializable("producttype", (Serializable) lstProduct.get(position));
+
+                   nextFrag.setArguments(bundle);
 
                 android.support.v4.app.FragmentManager fragmentManager= getActivity().getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
@@ -106,16 +118,17 @@ public class ProductFragment extends Fragment {
         @Override
         public int getCount() {
 
-            return 0;
+            return lstProduct.size();
         }
 
         @Override
         public Object getItem(int position) {
-          return null;
+          return lstProduct.get(position);
         }
 
         @Override
         public long getItemId(int position) {
+
             return position;
         }
 
@@ -124,11 +137,25 @@ public class ProductFragment extends Fragment {
             convertView=getActivity().getLayoutInflater().inflate(R.layout.item_product,null);
             ImageView imageView = (ImageView) convertView.findViewById(R.id.imgProduct);
             TextView txtName= (TextView)convertView.findViewById(R.id.txtName);
-            TextView txtCost= (TextView) convertView.findViewById(R.id.txtCost);
+            TextView txtPrice= (TextView) convertView.findViewById(R.id.txtPrice);
 
-            imageView.setImageBitmap(null);
-            txtName.setText("1");
-            txtCost.setText("10000đ");
+
+
+            Drawable drawable = getResources().getDrawable(R.drawable.binh20l);
+            Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+            imageView.setImageBitmap(bitmap);
+            try {
+                String name = getItem(position).getClass().getField("name").get(getItem(position)).toString();
+                String price= getItem(position).getClass().getField("price").get(getItem(position)).toString();
+
+                txtName.setText(name);
+                txtPrice.setText(price);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+
 
             return convertView;
         }

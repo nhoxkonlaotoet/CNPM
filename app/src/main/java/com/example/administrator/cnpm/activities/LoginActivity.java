@@ -23,6 +23,9 @@ public class LoginActivity extends AppCompatActivity {
 
         Button btn =(Button) findViewById(R.id.btnLogin);
 
+
+
+
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -42,4 +45,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 }

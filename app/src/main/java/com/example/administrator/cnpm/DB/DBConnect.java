@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 
 public class DBConnect {
-    public String ip = "192.168.0.113"; // IP của máy làm Server
+    public String ip = "192.168.1.120"; // IP của máy làm Server
     String classs = "net.sourceforge.jtds.jdbc.Driver"; // Diver
     String db = "QuanLyBanNuoc";// Tên DB
     String un = "abcdef"; // Username tạo trong DB

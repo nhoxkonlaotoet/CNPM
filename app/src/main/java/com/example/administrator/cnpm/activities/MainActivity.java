@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.cnpm.BL.BLMain;
 import com.example.administrator.cnpm.R;
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         BLMain db =new BLMain();
 
         isCustomer = db.getRole(user)=="Khách"?false:true;
-        Toast.makeText(MainActivity.this, db.getRole(user)+"\t"+ isCustomer.toString(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MainActivity.this, db.getRole(user)+"\t"+ isCustomer.toString(), Toast.LENGTH_SHORT).show();
 
         navigation.setSelectedItemId(R.id.navigation_home);
 

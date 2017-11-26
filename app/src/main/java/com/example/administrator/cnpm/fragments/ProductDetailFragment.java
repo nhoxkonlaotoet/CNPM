@@ -4,7 +4,6 @@ package com.example.administrator.cnpm.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +55,9 @@ public class ProductDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         Bundle bundle = this.getArguments();
 
-        if(bundle != null){
-            Log.e("bundle",bundle.getString("key"));
-        }
+//        if(bundle != null){
+//            Log.e("bundle", String.valueOf(bundle.getParcelableArray("producttype")));
+//        }
 
 
         return inflater.inflate(R.layout.fragment_product_detail, container, false);
